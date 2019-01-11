@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ActivemqlabApplicationTests {
+public class ActivemqlabApplicationIT {
 
 	@Test
 	public void contextLoads() {
