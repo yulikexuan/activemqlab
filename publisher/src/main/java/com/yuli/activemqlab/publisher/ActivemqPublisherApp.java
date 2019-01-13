@@ -13,6 +13,9 @@ public class ActivemqPublisherApp implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		TopicPublisher publisher = new TopicPublisher();
+		publisher.produce();
 	}
 
 }
