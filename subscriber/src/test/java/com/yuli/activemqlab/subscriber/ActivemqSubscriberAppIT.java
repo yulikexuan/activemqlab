@@ -1,4 +1,4 @@
-package com.yuli.activemqlab;
+package com.yuli.activemqlab.subscriber;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ActivemqlabApplicationIT {
+public class ActivemqSubscriberAppIT {
 
 	@Test
 	public void contextLoads() {
