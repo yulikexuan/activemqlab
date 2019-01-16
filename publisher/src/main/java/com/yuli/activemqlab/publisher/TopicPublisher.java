@@ -24,8 +24,9 @@ public class TopicPublisher {
 
 	public void produce(int times) throws Exception {
 
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-				BROKER_URL);
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+				IActiveMQClient.BROKER_URL);
+		connectionFactory.setClientID("yu.li");
 		Connection connection = null;
 
 		try {
@@ -38,14 +39,16 @@ public class TopicPublisher {
 			Topic topic = session.createTopic(TOPIC_NAME);
 
 			MessageProducer producer = session.createProducer(topic);
+			producer.setDeliveryMode(DeliveryMode.PERSISTENT);
+
 			Message msg = session.createTextMessage(PAYLOAD);
 
 			log.info(">>>>>>> Sending text '{}' ... ...%n", PAYLOAD);
 
 			IntStream.range(1, times)
 					.parallel()
-					.forEach(i -> send(producer, msg, i));
-			Thread.sleep(10000);
+					.forEach(i -> send(producer, msg));
+
 			session.close();
 
 		} finally {
@@ -57,10 +60,10 @@ public class TopicPublisher {
 
 	}
 
-	private void send(MessageProducer producer, Message msg, int i) {
+	private void send(MessageProducer producer, Message msg) {
 		try {
 			log.info(">>>>>>> {}. Sending text '{}' ... ...%n",
-					i, PAYLOAD);
+					PAYLOAD);
 			producer.send(msg);
 			Thread .sleep(10000);
 		} catch (JMSException  | InterruptedException e) {
